@@ -1,0 +1,48 @@
+model UserProfile {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id])
+
+  username     String   @unique
+  avatarUrl    String?
+  email        String   @unique
+  baekjoonId   String?  @unique
+  baekjoonTier BaekjoonTier?
+}
+
+enum BaekjoonTier {
+  Unrated
+  Bronze_5
+  Bronze_4
+  Bronze_3
+  Bronze_2
+  Bronze_1
+  Silver_5
+  Silver_4
+  Silver_3
+  Silver_2
+  Silver_1
+  Gold_5
+  Gold_4
+  Gold_3
+  Gold_2
+  Gold_1
+  Platinum_5
+  Platinum_4
+  Platinum_3
+  Platinum_2
+  Platinum_1
+  Diamond_5
+  Diamond_4
+  Diamond_3
+  Diamond_2
+  Diamond_1
+  Ruby_5
+  Ruby_4
+  Ruby_3
+  Ruby_2
+  Ruby_1
+  Master
+}

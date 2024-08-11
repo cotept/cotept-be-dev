@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "baseUrl": "./",
+    "paths": {
+      "@app/auth": ["./src/modules/auth/"],
+      "@app/users": ["./src/modules/users/"],
+      "@app/notifications": ["./src/modules/notifications/"],
+      "@app/payments": ["./src/modules/payments/"],
+      "@app/board": ["./src/modules/board/"],
+      "@app/reservations": ["./src/modules/reservations/"],
+      "@app/prisma": ["./src/modules/prisma/"],
+      "@app/common": ["./src/common/"]
+    }
+  }
+}

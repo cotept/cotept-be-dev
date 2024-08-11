@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.env.dev
+    environment:
+      - POSTGRES_USER=${DATABASE_ID}
+      - POSTGRES_PASSWORD=${DATABASE_PW}
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: development
+    command: sh -c "npx prisma migrate deploy --schema ./prisma/schema && npx prisma generate --schema ./prisma/schema && pnpm run start:dev"
+    env_file:
+      - ./.env.dev
+    ports:
+      - "3005:3005"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      db:
+        condition: service_started
+    # "migrate:dev": "dotenv -e .env.dev -- npx prisma migrate dev",
+    # "migrate:prod": "dotenv -e .env.prod -- npx prisma migrate deploy"
+  # app-production:
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #     target: production
+  #   command: sh -c "pnpm prisma migrate deploy --schema ./prisma && pnpm prisma generate --schema ./prisma && pnpm run start:prod"
+  #   environment:
+  #     - NODE_ENV=production
+  #   env_file:
+  #     - ./.env.prod
+  #   ports:
+  #     - "3006:3006"
+  #   depends_on:
+  #     db:
+  #       condition: service_started

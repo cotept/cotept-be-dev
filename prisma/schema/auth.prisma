@@ -1,0 +1,25 @@
+enum Role {
+  ADMIN
+  MENTEE
+  MENTOR
+}
+
+enum Provider {
+  GOOGLE
+  KAKAO
+  LOCAL
+}
+model User {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  email        String   @unique
+  password     String
+  providerId   String?  @unique
+  provider     Provider?
+  refreshToken String?
+  role         Role
+
+  profile      UserProfile?
+}
